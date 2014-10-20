@@ -68,6 +68,7 @@ module.exports = function (grunt) {
             var pattern = options.patterns[label];
             var matches = content.match(pattern);
             var match;
+            var replaced;
             if (matches) {
               grunt.log.writeln('Matching ' + [filepath, pattern, JSON.stringify(matches)].join(': '));
               for (var i=0; i<matches.length; i+=1){
@@ -86,7 +87,7 @@ module.exports = function (grunt) {
                       grunt.log.writeln('Linking ' + label + ': ' + lastLink +
                         (baseLink !== lastLink ? ' -> ' + baseLink : '') + ' -> ' + hashLink.green);
                       replacement = replacement.replace(lastLink, hashLink);
-                      content = content.replace(pattern, replacement);
+                      content = content.replace(match, replacement);
                       updated = true;
                     } else {
                       grunt.log.writeln('Already linked ' + label + ': ' +
